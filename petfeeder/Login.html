@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register & Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="stylesheet.css">
+    <script type="module" src="firebaseauth.js"></script>
+
+    
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.6.0/css/fontawesome.min.css">
+  <style>
+    body {
+      font-family: "Lilita One", sans-serif;
+    }
+</style>
+
+</head>
+<body>
+    <div class="container" id="signup" style="display:none;">
+      <h1 class="form-title">Register</h1>
+      <form method="post" action="">
+        <div id="signUpMessage" class="messageDiv" style="display:none;"></div>
+        <div class="input-group">
+           <i class="fas fa-user"></i>
+           <input type="text"  id="fName" placeholder="First Name" required>
+           <label for="fname">First Name</label>
+        </div>
+        <div class="input-group">
+            <i class="fas fa-user"></i>
+            <input type="text"  id="lName" placeholder="Last Name" required>
+            <label for="lName">Last Name</label>
+        </div>
+        <div class="input-group">
+            <i class="fas fa-envelope"></i>
+            <input type="email"  id="rEmail" placeholder="Email" required>
+            <label for="rEmail">Email</label>
+        </div>
+        <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="rPassword"  placeholder="Password" required>
+            <label for="rPassword">Password</label>
+        </div>
+       <button class="btn" id="submitSignUp" >Sign Up!</button>
+      </form>
+      <div class="links">
+        <p>Already Have Account?</p>
+        <button id="signInButton">Login!</button>
+      </div>
+    </div>
+
+  <div class="container" id="signIn">
+        <h1 class="form-title">Login!</h1>
+        <form method="post" action="">
+          <div id="signInMessage" class="messageDiv" style="display:none;"></div>
+
+          <div class="input-group">
+              <i class="fas fa-envelope"></i>
+              <input type="email"  id="email" placeholder="Email" required>
+              <label for="email">Email</label>
+          </div>
+          <div class="input-group">
+              <i class="fas fa-lock"></i>
+            <input type="password" id="password"  placeholder="Password" required>
+              <label for="password">Password</label>
+          </div>
+         <button  class="btn"  id="submitSignIn">Login!</button>
+        </form>
+        <div class="links">
+          <p>Don't have account yet?</p>
+          <button id="signUpButton">Sign Up!</button>
+        </div>
+      </div>
+      <script src="script.js"></script>
+      <style>
+        /* Reset and base styles */
+body {
+    background-color: #eeb3f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background: #fff;
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+    transition: all 0.4s ease-in-out;
+}
+
+h1.form-title {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 25px;
+    font-weight: bold;
+    color: #000
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-group i {
+    position: absolute;
+    top: 12px;
+    left: 10px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 12px 12px 35px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.input-group input:focus {
+    border-color: #eeb3f6;
+    background-color: #faffb7;
+}
+
+.input-group label {
+    display: block;
+    font-size: 14px;
+    margin-top: 5px;
+    color: #666;
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #eeb3f6;
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #faffb7;
+}
+
+.or {
+    text-align: center;
+    margin: 20px 0;
+    color: #eeb3f6;
+    font-size: 14px;
+}
+
+.icons {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.icons i {
+    font-size: 24px;
+    margin: 0 10px;
+    color: #eeb3f6;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.icons i:hover {
+    transform: scale(1.1);
+}
+
+.links {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.links p {
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.links button {
+    background: none;
+    color: #eeb3f6;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+
+.messageDiv {
+    background-color: #faffb7;
+    color: #eeb3f6;
+    border: 1px solid #faffb7;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    display: none;
+}
+      </style>
+
+
+<script>
+    // login.js
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
+
+// 🔐 Your Firebase config
+const firebaseConfig = {
+  apiKey: "AIzaSyDFWNE0kyIGJCZkepR0wex5yhlyi0lItMs",
+  authDomain: "petfeeder-ae3c2.firebaseapp.com",
+  // ... other config values
+};
+
+// 🚀 Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// 🧠 Login function
+document.getElementById("loginForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // ✅ Login successful
+      href = "index.html"; // redirect to homepage
+    })
+    .catch((error) => {
+      alert("Login failed: " + error.message);
+    });
+});
+
+</script>
+<style>
+    .puppy-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-auto-rows: 200px;
+      animation: scroll 60s linear infinite;
+      z-index: -1;
+      opacity: 1;
+    }
+
+    .puppy-background img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @keyframes scroll {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-25%, -25%); }
+    }
+
+    .login-box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0.9);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      max-width: 320px;
+      width: 90%;
+      z-index: 1;
+    }
+
+    .login-box h2 {
+      margin-bottom: 20px;
+      color: #ff66b2;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 10px;
+      background: #ffe6f0;
+      font-size: 16px;
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 12px;
+      background: #ff66b2;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .login-box button:hover {
+      background: #ff3399;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Filled Puppy Background -->
+  <div class="puppy-background" id="puppyGrid"></div>
+</style>
+<script>
+    // Fill the background with lots of puppy images
+    const grid = document.getElementById('puppyGrid');
+    const puppyCount = 100;
+    const baseUrl = 'https://placedog.net/400/400?id=';
+
+    for (let i = 0; i < puppyCount; i++) {
+      const img = document.createElement('img');
+      img.src = `${baseUrl}${(i % 50) + 1}`;
+      grid.appendChild(img);
+    }
+  </script>
+
+  
+
+
+</body>
+</html>
+
+
+

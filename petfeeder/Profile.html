@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Profile</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.6.0/css/fontawesome.min.css">
+  <style>
+    body {
+      font-family: "Lilita One", sans-serif;
+    }
+    .Feed_Button .puppy-button {
+      cursor: pointer;
+    }
+    body {
+      background-color: #eeb3f6;
+      color: #000;
+      text-align: center;
+      padding: 2rem;
+    }
+    h3 {
+      text-align: left;
+      font-size: 20px;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    h4 {
+      text-align: left;
+      font-size: 20px;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    h5 {
+      text-align: left;
+      font-size: 25px;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    h6 {
+      text-align: left;
+      font-size: 25px;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    .profile-container {
+      background-color: #faffb7;
+      padding: 2rem;
+      border-radius: 20px;
+      max-width: 400px;
+      margin: auto;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+
+    }
+
+    .profile-pic {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #ff80bf;
+      margin-bottom: 1rem;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 0.7rem;
+      margin: 0.5rem 0;
+      border-radius: 10px;
+      border: 1px solid #ffb3d9;
+      font-family: inherit;
+    }
+
+    button {
+      background-color: #eeb3f6;
+      color: #000;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+
+    button:hover {
+      background-color: #ffb3d9;
+    }
+
+    label {
+      display: block;
+      margin: 0.5rem 0 0.2rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="profile-container">
+    <h2>🐶Your Cute Pet Profile!</h2>
+    <img id="profileImg" class="profile-pic" src="https://placekitten.com/200/200" alt="Profile Picture">
+    <input type="file" id="imageUpload" accept="image/*">
+
+    <h3><label for="name">Name:</label></h3>
+    <h5><input type="text" id="nameInput" placeholder="Enter your pet's name"></h5>
+
+    <h4><label for="bio">Bio:</label></h4>
+    <h6><textarea id="bioInput" placeholder="Tell us about your lovely pet! 🐾"></textarea></h6>
+
+    <button onclick="saveProfile()">Save Profile</button>
+    <button onclick="resetProfile()">Reset</button>
+    <button onclick="logout()">Logout</button>
+
+  </div>
+  <script>
+function logout() {
+  // If you're using a login system, clear session-related items here
+  // Example: localStorage.removeItem("isLoggedIn");
+  alert("🐾 You have been logged out. Bye furfriend!");
+
+  // Redirect to login page (edit the URL if different)
+  window.location.href = "Login.html";
+}
+  </script>
+
+
+  <script>
+    const imageInput = document.getElementById("imageUpload");
+    const profileImg = document.getElementById("profileImg");
+    const nameInput = document.getElementById("nameInput");
+    const bioInput = document.getElementById("bioInput");
+
+    // Load stored profile
+    window.onload = () => {
+      const storedImg = localStorage.getItem("profilePicture");
+      const storedName = localStorage.getItem("profileName");
+      const storedBio = localStorage.getItem("profileBio");
+
+      if (storedImg) profileImg.src = storedImg;
+      if (storedName) nameInput.value = storedName;
+      if (storedBio) bioInput.value = storedBio;
+    };
+
+    // Convert image to Base64 and preview it
+    imageInput.addEventListener("change", () => {
+      const file = imageInput.files[0];
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+        const base64Image = e.target.result;
+        profileImg.src = base64Image;
+        localStorage.setItem("profilePicture", base64Image);
+      };
+
+      if (file) reader.readAsDataURL(file);
+    });
+
+    function saveProfile() {
+      localStorage.setItem("profileName", nameInput.value);
+      localStorage.setItem("profileBio", bioInput.value);
+      alert("✨ Profile saved!");
+    }
+
+    function resetProfile() {
+      if (confirm("Reset your profile?")) {
+        localStorage.clear();
+        profileImg.src = "https://placekitten.com/200/200";
+        nameInput.value = "";
+        bioInput.value = "";
+      }
+    }
+  </script>
+
+
+  <div class="particles">
+    <span>💖</span>
+    <span>🐾</span>
+    <span>✨</span>
+    <span>💗</span>
+    <span>🐶</span>
+    <span>🦴</span>
+  </div>
+
+<style>
+
+.particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.particles span {
+  position: absolute;
+  font-size: 1.5rem;
+  opacity: 0.7;
+  animation: float 10s linear infinite;
+  animation-delay: calc(-10s * var(--i));
+}
+
+.particles span:nth-child(1) { left: 5%; animation-duration: 12s; --i: 1; }
+.particles span:nth-child(2) { left: 25%; animation-duration: 13s; --i: 2; }
+.particles span:nth-child(3) { left: 45%; animation-duration: 14s; --i: 3; }
+.particles span:nth-child(4) { left: 65%; animation-duration: 15s; --i: 4; }
+.particles span:nth-child(5) { left: 75%; animation-duration: 17s; --i: 5; }
+.particles span:nth-child(6) { left: 85%; animation-duration: 11s; --i: 6; }
+
+@keyframes float {
+  0% {
+    top: 100%;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    top: -10%;
+    transform: translateY(-100%) scale(1.2);
+  }
+}
+
+ @media (max-width: 480px) {
+  body {
+    padding: 1rem;
+  }
+
+  .profile-container {
+    padding: 1.5rem;
+    max-width: 100%;
+    border-radius: 15px;
+  }
+
+  .profile-pic {
+    width: 120px;
+    height: 120px;
+  }
+
+  input, textarea {
+    font-size: 1rem;
+    padding: 0.6rem;
+  }
+
+  button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+    margin-top: 0.7rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  h3, h4, h5, h6 {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  label {
+    text-align: center;
+    font-size: 0.95rem;
+  }
+
+  .particles span {
+    font-size: 1.2rem;
+  }
+}
+
+</style>
+
+
+
+</body>
+</html>
